@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: correios-lib
+Version: 0.0.1
+Summary: Interface python com logs para uso dos serviços fornecidos pelo SIGEPWeb dos Correios.
+Home-page: https://github.com/trocafone/correios-lib
+Author: Flávio Briz
+Author-email: flavio.briz@gmail.com
+License: MIT License
+Description: UNKNOWN
+Keywords: correios sigep sigepweb reversa
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

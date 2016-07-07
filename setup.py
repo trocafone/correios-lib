@@ -52,8 +52,8 @@ CLASSIFIERS = [
 ]
 
 setup(
-    name='correios-lib',
-    version=get_version('correios-lib'),
+    name='correios_lib',
+    version=get_version('correios_lib'),
     url='https://github.com/trocafone/correios-lib',
     license='MIT License',
     author='Flávio Briz',
