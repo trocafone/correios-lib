@@ -3,7 +3,7 @@
 #
 # The MIT License (MIT)
 #
-# Copyright (c) 2016 Michell Stuttgart
+# Copyright (c) 2016 Trocafone
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-__title__ = 'pysigep'
+__title__ = 'correios-lib'
 __version__ = '0.0.1'
 __author__ = 'Flávio Avad Briz'
 __license__ = 'MIT License'
