@@ -15,7 +15,25 @@ class StubWebserviceBase(WebserviceBase):
 class TestWebserviceBase(TestCase):
 
     def setUp(self):
-        self.webservice = StubWebserviceBase(env='DEV')
+        self.webservice = StubWebserviceBase(
+            env='DEV',
+            id_correios='empresacws',
+            password='123456'
+        )
 
     def test_not_implemented_get_env(self):
-        self.assertRaises(NotImplementedError, WebserviceBase, 'DEV')
+        self.assertRaises(
+            NotImplementedError,
+            WebserviceBase,
+            'DEV',
+            'empresacws',
+            '123456'
+        )
+
+    def test_nonexisting_method(self):
+        self.assertRaises(
+            WebserviceError,
+            self.webservice.call,
+            'test',
+            {'test'}
+        )

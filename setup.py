@@ -64,7 +64,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'suds-py3==1.3.2.0',
+        'zeep==0.11.0',
+        'certifi==2016.2.28',
         'voluptuous==0.8.11'
     ],
     platforms=['any'],

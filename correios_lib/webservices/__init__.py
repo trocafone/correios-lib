@@ -25,7 +25,9 @@
 #
 ###############################################################################
 
-from suds.client import Client
+from zeep import Client
+from zeep.transports import Transport
+import certifi
 
 
 class WebserviceError(Exception):
@@ -34,15 +36,34 @@ class WebserviceError(Exception):
 
 class WebserviceBase():
 
-    def __init__(self, env):
-        ''' Depending on the env get a different wsdl definition
+    def __init__(self, env: str, id_correios: str, password: str):
+        ''' Webservice initialization.
 
-        :env: str - Environment used to get the wsdl
+        Depending on the env get a different wsdl definition.
+        New Correios SIGEP uses HTTPAuth to do requests.
+
+        Args:
+            env (str): Environment used to get the wsdl
+            id_correios (str): IdCorreios given by correios website
+            password (str): password vinculated to the IdCorreios
         '''
-        self.client = Client(self.get_env(env))
+        t = Transport(
+            verify=certifi.where(),
+            http_auth=(id_correios, password)
+        )
+        self.client = Client(wsdl=self.get_env(env), transport=t)
 
-    def get_env(self, env):
-        """ Must be implemented in order to return the correct wsdl """
+    def get_env(self, env: str) -> str:
+        """ Get WSDL Url.
+
+        Must be implemented in order to return the correct WSDL.
+
+        Args:
+            env (str): Environment used to get the wsdl
+
+        Returns:
+            str: WSDL Url of the corresponding environment
+        """
         raise NotImplementedError()
 
     def call(self, method, request):
@@ -53,15 +74,8 @@ class WebserviceBase():
         '''
         service_method = getattr(self.client.service, method, None)
 
-        if service_method is None:
-            available_services = [
-                x[0] for x in self.client.wsdl.messages.keys()
-                if x[0].find('Response') is -1
-            ]
+        try:
+            return service_method(request)
+        except ValueError:
             raise WebserviceError('The method you are trying to call does not '
-                                  'exists. Only the following methods are '
-                                  'available {0}'.format(
-                                      str(available_services)
-                                  ))
-
-        return service_method(request)
+                                  'exists.')
