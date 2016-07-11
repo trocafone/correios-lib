@@ -79,8 +79,9 @@ class WebserviceBase():
     def call(self, method, request):
         ''' Call the webservice method with the validated request content
 
-        :method: str - Name of the method available at the webservice
-        :request: RequestObject - Object containing all the info needed
+        Args:
+            method (str): Name of the method available at the webservice
+            request (RequestObject): Object containing all the info needed
         '''
         service_method = getattr(self.client.service, method, None)
 
