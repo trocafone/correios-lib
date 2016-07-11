@@ -24,3 +24,31 @@
 # SOFTWARE.
 #
 ###############################################################################
+
+
+class EntityBase():
+
+    def __init__(self, wsdl, content=None, schema=None):
+        """ Base entity used to all responses and requests.
+
+        Args:
+            content (dict): Keeps content to further validation
+            wsdl (WebserviceBase): Used to get types used
+            schema (voluptuous.Schema): Used to validate entity
+        """
+        self.wsdl = wsdl
+        self.content = content
+        self.schema = schema
+
+    def validate(self) -> bool:
+        """ Validates content against schema
+
+        In case of failure an error is kept inside the entity object,
+        to be displayed by the client user if needed.
+        """
+        try:
+            self.schema(self.content)
+            return True
+        except Exception as e:
+            self.error = e
+            return False
