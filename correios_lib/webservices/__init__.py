@@ -36,7 +36,7 @@ class WebserviceError(Exception):
 
 class WebserviceBase():
 
-    def __init__(self, env: str, id_correios: str, password: str):
+    def __init__(self, env: str, id_correios: str, password: str, cert=False):
         ''' Webservice initialization.
 
         Depending on the env get a different wsdl definition.
@@ -47,8 +47,18 @@ class WebserviceBase():
             id_correios (str): IdCorreios given by correios website
             password (str): password vinculated to the IdCorreios
         '''
+
+        ''' Untrusted ssl certificate for homolog envs see more at:
+
+        https://www.ssllabs.com/ssltest/analyze.html?d=apphom.correios.com.br
+        '''
+        if cert is False:
+            verify = False
+        else:
+            verify = certifi.where()
+
         t = Transport(
-            verify=certifi.where(),
+            verify=verify,
             http_auth=(id_correios, password)
         )
         self.client = Client(wsdl=self.get_env(env), transport=t)

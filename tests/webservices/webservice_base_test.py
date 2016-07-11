@@ -1,15 +1,6 @@
 from unittest import TestCase
+from tests.helper import StubWebserviceBase
 from correios_lib.webservices import WebserviceBase, WebserviceError
-
-
-class StubWebserviceBase(WebserviceBase):
-
-    def get_env(self, env):
-        environments = {
-            'DEV': 'http://webservicescolhomologacao.correios.com.br/'
-            'ScolWeb/WebServiceScol?wsdl'
-        }
-        return environments[env]
 
 
 class TestWebserviceBase(TestCase):
