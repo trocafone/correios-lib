@@ -36,7 +36,7 @@ class WebserviceError(Exception):
 
 class WebserviceBase():
 
-    def __init__(self, env: str, id_correios: str, password: str, cert=False):
+    def __init__(self, env, id_correios, password, cert=False):
         ''' Webservice initialization.
 
         Depending on the env get a different wsdl definition.
