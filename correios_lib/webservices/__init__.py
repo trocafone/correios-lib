@@ -63,7 +63,7 @@ class WebserviceBase():
         )
         self.client = Client(wsdl=self.get_env(env), transport=t)
 
-    def get_env(self, env: str) -> str:
+    def get_env(self, env):
         """ Get WSDL Url.
 
         Must be implemented in order to return the correct WSDL.
@@ -82,6 +82,9 @@ class WebserviceBase():
         Args:
             method (str): Name of the method available at the webservice
             request (RequestObject): Object containing all the info needed
+
+        Returns:
+            dict: Result of the service call
         '''
         service_method = getattr(self.client.service, method, None)
 

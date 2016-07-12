@@ -40,11 +40,14 @@ class EntityBase():
         self.content = content
         self.schema = schema
 
-    def validate(self) -> bool:
+    def validate(self):
         """ Validates content against schema
 
         In case of failure an error is kept inside the entity object,
         to be displayed by the client user if needed.
+
+        Returns:
+            bool: Validation result
         """
         try:
             self.schema(self.content)
