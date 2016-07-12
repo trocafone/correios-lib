@@ -10,13 +10,13 @@ correios_lib.egg-info/requires.txt
 correios_lib.egg-info/top_level.txt
 correios_lib/entities/__init__.py
 correios_lib/entities/requests/__init__.py
-correios_lib/entities/requests/reversa/__init__.py
+correios_lib/entities/requests/solicitar_postagem_reversa.py
 correios_lib/entities/responses/__init__.py
-correios_lib/entities/responses/reversa/__init__.py
 correios_lib/webservices/__init__.py
-correios_lib/webservices/reversa/__init__.py
 tests/__init__.py
+tests/helper.py
 tests/entities/__init__.py
+tests/entities/entity_base_test.py
 tests/entities/requests/__init__.py
 tests/webservices/__init__.py
 tests/webservices/webservice_base_test.py

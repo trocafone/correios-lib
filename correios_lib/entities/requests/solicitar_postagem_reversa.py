@@ -24,3 +24,15 @@
 # SOFTWARE.
 #
 ###############################################################################
+
+from . import EntityBase
+
+
+class Pessoa(EntityBase):
+    pass
+
+
+class RequestSolicitarPostagemReversa(EntityBase):
+
+    def __init__(self):
+        pass
