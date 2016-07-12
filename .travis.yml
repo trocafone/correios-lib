@@ -9,4 +9,4 @@ script:
   - coverage run --source=correios_lib setup.py test
 
 after_success:
-  - coveralls
+  ocular --data-file ".coverage" --config-file ".coveragerc"
