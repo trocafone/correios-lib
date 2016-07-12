@@ -26,34 +26,32 @@
 ###############################################################################
 
 from correios_lib.entities import EntityBase
-from tests.helper import StubWebserviceBase
 from voluptuous import Schema
 from unittest import TestCase
+from unittest.mock import Mock
 
 
 class EntityBaseTest(TestCase):
 
-    def setUp(self):
-        self.wsdl = StubWebserviceBase(
-            env='DEV',
-            id_correios='empresacws',
-            password='123456'
+    def test_non_implemented_schema(self):
+        entity = EntityBase({'test1': 123})
+        self.assertRaises(
+            NotImplementedError,
+            entity.validate
         )
 
     def test_success_validating_entity(self):
-        entity = EntityBase(
-            wsdl=self.wsdl,
-            content={'test1': 123, 'test2': 'abc'},
-            schema=Schema({'test1': int, 'test2': str})
+        entity = EntityBase({'test1': 123, 'test2': 'abc'})
+        entity.get_schema = Mock(
+            return_value=Schema({'test1': int, 'test2': str})
         )
 
         self.assertTrue(entity.validate())
 
     def test_insuccess_validating_entity(self):
-        entity = EntityBase(
-            wsdl=self.wsdl,
-            content={'test1': 123, 'test2': 'abc'},
-            schema=Schema({'test1': str, 'test2': str})
+        entity = EntityBase({'test1': 123, 'test2': 'abc'})
+        entity.get_schema = Mock(
+            return_value=Schema({'test1': str, 'test2': str})
         )
 
         self.assertFalse(entity.validate())

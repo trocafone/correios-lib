@@ -26,19 +26,15 @@
 ###############################################################################
 
 
-class EntityBase():
+class EntityBase(dict):
 
-    def __init__(self, wsdl, content=None, schema=None):
-        """ Base entity used to all responses and requests.
+    def get_schema(self):
+        """ Returns validation schema
 
-        Args:
-            content (dict): Keeps content to further validation
-            wsdl (WebserviceBase): Used to get types used
-            schema (voluptuous.Schema): Used to validate entity
+        Returns:
+            voluptous.Schema: Schema with validation rules
         """
-        self.wsdl = wsdl
-        self.content = content
-        self.schema = schema
+        raise NotImplementedError()
 
     def validate(self):
         """ Validates content against schema
@@ -49,8 +45,9 @@ class EntityBase():
         Returns:
             bool: Validation result
         """
+        schema = self.get_schema()
         try:
-            self.schema(self.content)
+            schema(self)
             return True
         except Exception as e:
             self.error = e

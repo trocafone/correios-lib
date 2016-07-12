@@ -26,13 +26,34 @@
 ###############################################################################
 
 from . import EntityBase
+from voluptuous import Schema
 
 
 class Pessoa(EntityBase):
-    pass
+    def __init__(self, nome="", logradouro="", numero="", complemento="",
+                 bairro="", referencia="", cidade="", uf="", cep="", ddd="",
+                 telefone="", email=""):
+        super(Pessoa, self).__init__(locals())
+
+    def get_schema(self):
+        self.schema = Schema({
+            'nome': str,
+            'logradouro': str,
+            'numero': str,
+            'complemento': str,
+            'bairro': str,
+            'referencia': str,
+            'cidade': str,
+            'uf': str,
+            'cep': str,
+            'ddd': str,
+            'telefone': str,
+            'email': str
+        })
 
 
 class RequestSolicitarPostagemReversa(EntityBase):
 
-    def __init__(self):
+    def __init__(self, cod_administrativo, codigo_servico, cartao,
+                 destinatario, coletas_solicitadas):
         pass
