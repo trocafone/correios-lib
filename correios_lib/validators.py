@@ -3,6 +3,7 @@ from brazilnum.util import clean_id
 from brazilnum.cnpj import validate_cnpj
 from brazilnum.cpf import validate_cpf
 from brazilnum.cep import format_cep
+import re
 
 
 def CNPJ(value):
@@ -27,6 +28,6 @@ def CEP(value):
 
 
 def Email(value):
-    if "@" not in value:
+    if not re.match("[^@]+@[^@]+\.[^@]+", value):
         raise Invalid("This email is invalid.")
     return value

@@ -12,3 +12,7 @@ class TestCEP(TestCase):
     def test_invalid_ceps(self):
         for i in self.invalid_cases:
             self.assertRaises(Invalid, CEP, i)
+
+    def test_valid_ceps(self):
+        for i in self.valid_cases:
+            self.assertTrue(CEP(i))
