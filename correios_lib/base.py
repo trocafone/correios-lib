@@ -93,3 +93,31 @@ class WebserviceBase():
         except ValueError:
             raise WebserviceError('The method you are trying to call does not '
                                   'exists.')
+
+
+class EntityBase(dict):
+
+    def get_schema(self):
+        """ Returns validation schema
+
+        Returns:
+            voluptous.Schema: Schema with validation rules
+        """
+        raise NotImplementedError()
+
+    def validate(self):
+        """ Validates content against schema
+
+        In case of failure an error is kept inside the entity object,
+        to be displayed by the client user if needed.
+
+        Returns:
+            bool: Validation result
+        """
+        schema = self.get_schema()
+        try:
+            schema(self)
+            return True
+        except Exception as e:
+            self.error = e
+            return False

@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-from correios_lib.entities import EntityBase
+from correios_lib.base import EntityBase
 from voluptuous import Schema
 from unittest import TestCase
 from mock import Mock

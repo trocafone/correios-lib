@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-from correios_lib.webservices import WebserviceBase
+from correios_lib.base import WebserviceBase
 
 
 class StubWebserviceBase(WebserviceBase):

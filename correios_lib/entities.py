@@ -24,3 +24,29 @@
 # SOFTWARE.
 #
 ###############################################################################
+
+from correios_lib.base import EntityBase
+from voluptuous import Schema
+
+
+class Pessoa(EntityBase):
+    def __init__(self, nome="", logradouro="", numero="", complemento="",
+                 bairro="", referencia="", cidade="", uf="", cep="", ddd="",
+                 telefone="", email=""):
+        super(Pessoa, self).__init__(locals())
+
+    def get_schema(self):
+        self.schema = Schema({
+            'nome': str,
+            'logradouro': str,
+            'numero': str,
+            'complemento': str,
+            'bairro': str,
+            'referencia': str,
+            'cidade': str,
+            'uf': str,
+            'cep': str,
+            'ddd': str,
+            'telefone': str,
+            'email': str
+        })
