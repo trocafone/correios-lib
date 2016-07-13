@@ -128,7 +128,7 @@ class EntityBase(dict):
         """
         schema = self.get_schema()
         try:
-            schema(self)
+            super(EntityBase, self).__init__(schema(self))
             return True
         except Exception as e:
             self.error = e
