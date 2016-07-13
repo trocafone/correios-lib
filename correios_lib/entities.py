@@ -26,28 +26,24 @@
 ###############################################################################
 
 from correios_lib.base import EntityBase
-from voluptuous import Schema, Required, All, Length
+from voluptuous import Schema, Required, All, Length, Optional
 from correios_lib.validators import CEP, Email
 
 
 class Pessoa(EntityBase):
-    def __init__(self, nome="", logradouro="", numero="", complemento="",
-                 bairro="", referencia="", cidade="", uf="", cep="", ddd="",
-                 telefone="", email=""):
-        super(Pessoa, self).__init__(locals())
 
     def get_schema(self):
-        self.schema = Schema({
+        return Schema({
             Required('nome'): All(str, Length(min=4)),
             Required('logradouro'): All(str, Length(min=4)),
             Required('numero'): All(str, Length(min=1)),
-            'complemento': str,
+            Optional('complemento'): str,
             Required('bairro'): All(str, Length(min=2)),
-            'referencia': str,
+            Optional('referencia'): str,
             Required('cidade'): All(str, Length(min=3)),
             Required('uf'): All(str, Length(min=2, max=2)),
             Required('cep'): All(CEP, Length(min=8, max=9)),
-            'ddd': All(str, Length(min=2, max=2)),
-            'telefone': All(str, Length(min=8, max=10)),
-            'email': Email
+            Optional('ddd'): All(str, Length(min=2, max=2)),
+            Optional('telefone'): All(str, Length(min=8, max=10)),
+            Optional('email'): Email
         })

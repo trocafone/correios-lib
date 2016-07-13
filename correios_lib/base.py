@@ -27,6 +27,7 @@
 
 from zeep import Client
 from zeep.transports import Transport
+from voluptuous import Invalid, MultipleInvalid
 import certifi
 
 
@@ -96,6 +97,17 @@ class WebserviceBase():
 
 
 class EntityBase(dict):
+
+    def __init__(self, **kargs):
+        super(EntityBase, self).__init__(kargs)
+        self.validate()
+
+        try:
+            raise getattr(self, 'error')
+        except AttributeError:
+            pass
+        except Invalid as e:
+            raise MultipleInvalid([e])
 
     def get_schema(self):
         """ Returns validation schema
