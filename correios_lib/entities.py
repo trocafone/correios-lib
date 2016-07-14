@@ -80,7 +80,7 @@ class Objeto(EntityBase):
             Optional('desc'): All(Coerce(str), Length(max=255)),
             Optional('entrega'): All(Coerce(str), Length(max=13)),
             Optional('num'): All(Coerce(str), Length(max=13)),
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class Produto(EntityBase):
@@ -90,4 +90,27 @@ class Produto(EntityBase):
             Optional('codigo'): Coerce(int),
             Optional('tipo'): Coerce(int),
             Optional('qtd'): Coerce(int)
-        })
+        }, extra=REMOVE_EXTRA)
+
+
+class Remetente(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('nome'): All(Coerce(str), Length(max=60)),
+            Required('logradouro'): All(Coerce(str), Length(max=72)),
+            Required('numero'): All(Coerce(str), Length(max=8)),
+            Optional('complemento'): All(Coerce(str), Length(max=30)),
+            Required('bairro'): All(Coerce(str), Length(max=50)),
+            Optional('referencia'): All(Coerce(str), Length(max=60)),
+            Required('cidade'): All(Coerce(str), Length(max=36)),
+            Required('uf'): All(Coerce(str), Length(min=2, max=2)),
+            Required('cep'): All(CEP, Length(min=8, max=9)),
+            Required('ddd'): All(Coerce(str), Length(min=2, max=2)),
+            Required('telefone'): All(Coerce(str), Length(min=8, max=12)),
+            Required('email'): All(Email, Length(max=72)),
+            Optional('celular'): All(Coerce(str), Length(max=9)),
+            Optional('ddd_celular'): All(Coerce(str), Length(max=3)),
+            Optional('sms'): Any('S', 'N'),
+            Optional('identificacao'): All(Coerce(str), Length(max=14))
+        }, extra=REMOVE_EXTRA)
