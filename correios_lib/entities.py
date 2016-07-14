@@ -26,24 +26,68 @@
 ###############################################################################
 
 from correios_lib.base import EntityBase
-from voluptuous import Schema, Required, All, Length, Optional
-from correios_lib.validators import CEP, Email
+from correios_lib.validators import CEP, Email, Date
+from voluptuous import *
 
 
-class Pessoa(EntityBase):
+class Destinatario(EntityBase):
+    ''' Reference to wsdl: '''
 
     def get_schema(self):
         return Schema({
-            Required('nome'): All(str, Length(min=4)),
-            Required('logradouro'): All(str, Length(min=4)),
-            Required('numero'): All(str, Length(min=1)),
-            Optional('complemento'): str,
-            Required('bairro'): All(str, Length(min=2)),
-            Optional('referencia'): str,
-            Required('cidade'): All(str, Length(min=3)),
-            Required('uf'): All(str, Length(min=2, max=2)),
+            Required('nome'): All(Coerce(str), Length(max=60)),
+            Required('logradouro'): All(Coerce(str), Length(max=72)),
+            Required('numero'): All(Coerce(str), Length(max=8)),
+            Optional('complemento'): All(Coerce(str), Length(max=30)),
+            Required('bairro'): All(Coerce(str), Length(max=50)),
+            Optional('referencia'): All(Coerce(str), Length(max=60)),
+            Required('cidade'): All(Coerce(str), Length(max=36)),
+            Required('uf'): All(Coerce(str), Length(min=2, max=2)),
             Required('cep'): All(CEP, Length(min=8, max=9)),
-            Optional('ddd'): All(str, Length(min=2, max=2)),
-            Optional('telefone'): All(str, Length(min=8, max=10)),
-            Optional('email'): Email
+            Optional('ddd'): All(Coerce(str), Length(min=2, max=2)),
+            Optional('telefone'): All(Coerce(str), Length(min=8, max=12)),
+            Optional('email'): All(Email, Length(max=72))
+        }, extra=REMOVE_EXTRA)
+
+
+class Coleta(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('tipo'): Any('CA', 'C', 'A'),
+            Optional('numero'): Coerce(int),
+            Optional('id_cliente'): All(Length(max=30)),
+            Optional('ag'): Date,
+            Optional('cartao'): Coerce(str),
+            Optional('valor_declarado'): float,
+            Optional('servico_adicional'): All(Coerce(str), Length(max=20)),
+            Optional('descricao'): All(Coerce(str), Length(max=255)),
+            Optional('ar'): Coerce(bool),
+            Optional('cklist'): Any(2, 4, 5, 7),
+            Optional('documento'): [str],
+            Required('remetente'): Remetente,
+            Optional('obj_col'): [Objeto],
+            Optional('produto'): Produto
+        }, extra=REMOVE_EXTRA)
+
+
+class Objeto(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('item'): 1,
+            Optional('id'): All(Coerce(str), Length(max=30)),
+            Optional('desc'): All(Coerce(str), Length(max=255)),
+            Optional('entrega'): All(Coerce(str), Length(max=13)),
+            Optional('num'): All(Coerce(str), Length(max=13)),
+        })
+
+
+class Produto(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Optional('codigo'): Coerce(int),
+            Optional('tipo'): Coerce(int),
+            Optional('qtd'): Coerce(int)
         })

@@ -1,15 +1,15 @@
 from unittest import TestCase
 from voluptuous import MultipleInvalid
-from correios_lib.entities import Pessoa
+from correios_lib.entities import Destinatario
 
 
-class TestPessoa(TestCase):
+class TestDestinatario(TestCase):
 
-    def test_invalid_pessoa(self):
-        self.assertRaises(MultipleInvalid, Pessoa)
+    def test_invalid_destinatario(self):
+        self.assertRaises(MultipleInvalid, Destinatario)
 
-    def test_valid_pessoa(self):
-        self.entity = Pessoa(
+    def test_valid_destinatario(self):
+        self.entity = Destinatario(
             nome="Myname",
             logradouro="Rua Pretty cool",
             numero="123",
