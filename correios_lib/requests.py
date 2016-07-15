@@ -25,8 +25,8 @@
 #
 ###############################################################################
 
-from base import EntityBase
-from entities import *
+from correios_lib.base import EntityBase
+from correios_lib.entities import *
 from voluptuous import *
 
 
@@ -34,9 +34,9 @@ class RequestSolicitarPostagemReversa(EntityBase):
 
     def get_schema(self):
         return Schema({
-            Required('cod_administrativo'): Coerse(int),
-            Required('cod_servico'): Coerse(int),
-            Required('cartao'): Coerse(int),
+            Required('codAdministrativo'): Coerce(int),
+            Required('codigo_servico'): Coerce(int),
+            Required('cartao'): Coerce(int),
             Required('destinatario'): Destinatario,
             Required('coletas_solicitadas'): [Coleta]
         })
