@@ -115,7 +115,8 @@ class EntityBase(dict):
         Returns:
             voluptous.Schema: Schema with validation rules
         """
-        raise NotImplementedError()
+        raise NotImplementedError("Every entitiy needs validation against a " +
+                                  "Schema.")
 
     def validate(self):
         """ Validates content against schema
