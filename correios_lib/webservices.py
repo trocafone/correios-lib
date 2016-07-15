@@ -26,7 +26,7 @@
 ###############################################################################
 
 
-from correios_lib.base import WebserviceBase
+from correios_lib.base import WebserviceBase, WebserviceError
 from correios_lib.requests import RequestSolicitarPostagemReversa
 
 
@@ -35,14 +35,18 @@ class LogisticaReversa(WebserviceBase):
     def get_env(self, env):
         envs = {
             'HOMOLOG': 'https://apphom.correios.com.br/logisticaReversaWS/'
-                       'logisticaReversaService/logisticaRev ersaWS?wsdl',
+                       'logisticaReversaService/logisticaReversaWS?wsdl',
             'PROD': 'https://cws.correios.com.br/logisticaReversaWS/'
-                    'logisticaReversaService/logisticaReversa WS?wsdl',
+                    'logisticaReversaService/logisticaReversaWS?wsdl',
         }
 
         return envs[env]
 
-    def SolicitarPostagemReversa(self, **request):
-        data = RequestSolicitarPostagemReversa(request)
+    def SolicitarPostagemReversa(self, request):
+        if not isinstance(request, RequestSolicitarPostagemReversa):
+            raise WebserviceError(
+                'Request must be an instance of correios_lib' +
+                '.requests.RequestSolicitarPostagemReversa'
+            )
 
-        return self.call('solicitarPostagemReversa', data)
+        return self.call('solicitarPostagemReversa', request)
