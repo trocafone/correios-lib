@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from unittest import TestCase
 from correios_lib.webservices import LogisticaReversa
 from correios_lib.entities import Remetente, Destinatario, Coleta, \

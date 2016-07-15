@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from correios_lib.entities import Remetente, Destinatario, Coleta, \
      Objeto, Produto
 from correios_lib.requests import RequestSolicitarPostagemReversa
