@@ -8,15 +8,42 @@ class ColetaTest(TestCase):
     def setUp(self):
         self.valid_cases = [
             (
-                {'tipo': 'C', 'remetente': },
-                {'codigo': 1, 'tipo': 123, 'qtd': 1},
-            ),
-            ({}, {})
+                {
+                    'tipo': 'C',
+                    'remetente': Remetente(
+                        nome='Name',
+                        logradouro='My Street',
+                        numero=123,
+                        bairro='My neighborhood',
+                        cidade='My City',
+                        uf='SP',
+                        cep='01508020',
+                        ddd=11,
+                        telefone='12312311',
+                        email='emailforwarning@email.com'
+                    )
+                },
+                {
+                    'tipo': 'C',
+                    'remetente': Remetente(
+                        nome='Name',
+                        logradouro='My Street',
+                        numero=123,
+                        bairro='My neighborhood',
+                        cidade='My City',
+                        uf='SP',
+                        cep='01508020',
+                        ddd=11,
+                        telefone='12312311',
+                        email='emailforwarning@email.com'
+                    )
+                }
+            )
         ]
 
     def test_invalid_coletas(self):
-        self.assertRaises(MultipleInvalid, Produto, codigo='abc')
+        self.assertRaises(MultipleInvalid, Coleta, codigo='abc')
 
     def test_valid_coletas(self):
         for i in self.valid_cases:
-            self.assertEquals(i[1], Produto(**i[0]))
+            self.assertEquals(i[1], Coleta(**i[0]))
