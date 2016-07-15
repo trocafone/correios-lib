@@ -40,3 +40,55 @@ class RequestSolicitarPostagemReversa(EntityBase):
             Required('destinatario'): Destinatario,
             Required('coletas_solicitadas'): [Coleta]
         })
+
+
+class RequestCancelarPedido(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('codAdministrativo'): Coerce(int),
+            Required('numeroPedido'): Coerce(int),
+            Required('tipo'): Any('C', 'A')
+        })
+
+
+class RequestAcompanharPedido(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('codAdministrativo'): Coerce(int),
+            Required('tipo'): Any('H', 'U'),
+            Required('numeroPedido'): Coerce(int),
+            Required('tipoSolicitacao'): Any('C', 'A')
+        })
+
+
+class RequestAcompanharPedidoPorData(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('codAdministrativo'): Coerce(int),
+            Required('tipoSolicitacao'): Any('C', 'A'),
+            Required('data'): Date
+        })
+
+
+class RequestSolicitarRange(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('codAdministrativo'): Coerce(int),
+            Required('tipo'): Any('AP', 'LR'),
+            Optional('servico'): Any('LR', 'LS', 'LV'),
+            Required('quantidade'): All(
+                Coerce(int), Range(min=1, max=100000)
+            )
+        })
+
+
+class RequestCalcularDigitoVerificador(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('numero'): Coerce(int),
+        })
