@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # #############################################################################
 #
 # The MIT License (MIT)
@@ -130,10 +131,12 @@ class WebserviceBase():
                  )
             )
 
-        try:
-            return service_method(**request)
-        except ValueError as e:
-            raise WebserviceError(e)
+        import sys
+        if sys.version_info <= (3, 0):
+            reload(sys)
+            sys.setdefaultencoding('utf-8')
+
+        return service_method(**request)
 
 
 class EntityBase(dict):
