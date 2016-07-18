@@ -136,7 +136,10 @@ class WebserviceBase():
             reload(sys)
             sys.setdefaultencoding('utf-8')
 
-        return service_method(**request)
+        try:
+            return service_method(**request)
+        except ValueError as e:
+            raise WebserviceError(e)
 
 
 class EntityBase(dict):
