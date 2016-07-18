@@ -86,4 +86,5 @@ class LogisticaReversaTest(TestCase):
             ]
         )
 
-        assert self.client.SolicitarPostagemReversa(request)['cod_erro'] == '00'
+        response = self.client.SolicitarPostagemReversa(request)
+        self.assertEquals(response['cod_erro'], '00')

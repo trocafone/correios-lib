@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # #############################################################################
 #
 # The MIT License (MIT)
@@ -133,9 +132,8 @@ class WebserviceBase():
 
         try:
             return service_method(**request)
-        except ValueError:
-            raise WebserviceError('The method you are trying to call does not '
-                                  'exists.')
+        except ValueError as e:
+            raise WebserviceError(e)
 
 
 class EntityBase(dict):

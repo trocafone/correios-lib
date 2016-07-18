@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from correios_lib.entities import Coleta, Remetente
 from unittest import TestCase
 from voluptuous import MultipleInvalid

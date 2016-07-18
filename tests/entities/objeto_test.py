@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from correios_lib.entities import Objeto
 from unittest import TestCase
 from voluptuous import MultipleInvalid
