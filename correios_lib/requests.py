@@ -39,7 +39,7 @@ class RequestSolicitarPostagemReversa(EntityBase):
             Required('cartao'): Coerce(int),
             Required('destinatario'): Destinatario,
             Required('coletas_solicitadas'): [Coleta]
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class RequestCancelarPedido(EntityBase):
@@ -49,7 +49,7 @@ class RequestCancelarPedido(EntityBase):
             Required('codAdministrativo'): Coerce(int),
             Required('numeroPedido'): Coerce(int),
             Required('tipo'): Any('C', 'A')
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class RequestAcompanharPedido(EntityBase):
@@ -60,7 +60,7 @@ class RequestAcompanharPedido(EntityBase):
             Required('tipoBusca'): Any('H', 'U'),
             Required('numeroPedido'): Coerce(int),
             Required('tipoSolicitacao'): Any('C', 'A')
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class RequestAcompanharPedidoPorData(EntityBase):
@@ -70,7 +70,7 @@ class RequestAcompanharPedidoPorData(EntityBase):
             Required('codAdministrativo'): Coerce(int),
             Required('tipoSolicitacao'): Any('C', 'A'),
             Required('data'): Date
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class RequestSolicitarRange(EntityBase):
@@ -83,7 +83,7 @@ class RequestSolicitarRange(EntityBase):
             Required('quantidade'): All(
                 Coerce(int), Range(min=1, max=100000)
             )
-        })
+        }, extra=REMOVE_EXTRA)
 
 
 class RequestCalcularDigitoVerificador(EntityBase):
@@ -91,4 +91,4 @@ class RequestCalcularDigitoVerificador(EntityBase):
     def get_schema(self):
         return Schema({
             Required('numero'): Coerce(int),
-        })
+        }, extra=REMOVE_EXTRA)
