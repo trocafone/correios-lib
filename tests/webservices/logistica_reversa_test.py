@@ -6,7 +6,8 @@ from correios_lib.entities import Remetente, Destinatario, Coleta, \
      Objeto, Produto
 from correios_lib.requests import RequestSolicitarPostagemReversa, \
      RequestAcompanharPedido, RequestAcompanharPedidoPorData, \
-     RequestCancelarPedido
+     RequestCancelarPedido, RequestSolicitarRange, \
+     RequestCalcularDigitoVerificador
 import datetime
 
 
@@ -118,3 +119,19 @@ class LogisticaReversaTest(TestCase):
         )
         response = self.client.CancelarPedido(request)
         self.assertEquals(response['cod_erro'], '-9')
+
+    def test_solicitar_range(self):
+        request = RequestSolicitarRange(
+            codAdministrativo='08082650',
+            tipo='AP',
+            quantidade=2
+        )
+        response = self.client.SolicitarRange(request)
+        self.assertEquals(response['cod_erro'], '0')
+
+    def test_calcular_digito_verificador(self):
+        request = RequestCalcularDigitoVerificador(
+            numero='19484775'
+        )
+        response = self.client.CalcularDigitoVerificador(request)
+        self.assertEquals(response['cod_erro'], '0')
