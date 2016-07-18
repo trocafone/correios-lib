@@ -57,7 +57,7 @@ class RequestAcompanharPedido(EntityBase):
     def get_schema(self):
         return Schema({
             Required('codAdministrativo'): Coerce(int),
-            Required('tipo'): Any('H', 'U'),
+            Required('tipoBusca'): Any('H', 'U'),
             Required('numeroPedido'): Coerce(int),
             Required('tipoSolicitacao'): Any('C', 'A')
         })

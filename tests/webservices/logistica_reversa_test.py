@@ -4,8 +4,8 @@ from unittest import TestCase
 from correios_lib.webservices import LogisticaReversa
 from correios_lib.entities import Remetente, Destinatario, Coleta, \
      Objeto, Produto
-from correios_lib.requests import RequestSolicitarPostagemReversa
-import logging.config
+from correios_lib.requests import RequestSolicitarPostagemReversa, \
+     RequestAcompanharPedido
 
 
 class LogisticaReversaTest(TestCase):
@@ -88,3 +88,13 @@ class LogisticaReversaTest(TestCase):
 
         response = self.client.SolicitarPostagemReversa(request)
         self.assertEquals(response['cod_erro'], '00')
+
+    def test_acompanhar_pedido(self):
+        request = RequestAcompanharPedido(
+            codAdministrativo='08082650',
+            tipoBusca='H',
+            tipoSolicitacao='A',
+            numeroPedido=194848820
+        )
+        response = self.client.AcompanharPedido(request)
+        self.assertEquals(response['cod_erro'], None)
