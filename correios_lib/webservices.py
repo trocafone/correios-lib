@@ -25,39 +25,28 @@
 #
 ###############################################################################
 
-from correios_lib.entities import EntityBase
-from tests.helper import StubWebserviceBase
-from voluptuous import Schema
-from unittest import TestCase
+
+from correios_lib.base import WebserviceBase, WebserviceError
+from correios_lib.requests import RequestSolicitarPostagemReversa
 
 
-class EntityBaseTest(TestCase):
+class LogisticaReversa(WebserviceBase):
 
-    def setUp(self):
-        self.wsdl = StubWebserviceBase(
-            env='DEV',
-            id_correios='empresacws',
-            password='123456'
-        )
+    def get_env(self, env):
+        envs = {
+            'HOMOLOG': 'https://apphom.correios.com.br/logisticaReversaWS/'
+                       'logisticaReversaService/logisticaReversaWS?wsdl',
+            'PROD': 'https://cws.correios.com.br/logisticaReversaWS/'
+                    'logisticaReversaService/logisticaReversaWS?wsdl',
+        }
 
-    def test_success_validating_entity(self):
-        entity = EntityBase(
-            wsdl=self.wsdl,
-            content={'test1': 123, 'test2': 'abc'},
-            schema=Schema({'test1': int, 'test2': str})
-        )
+        return envs[env]
 
-        self.assertTrue(entity.validate())
+    def SolicitarPostagemReversa(self, request):
+        if not isinstance(request, RequestSolicitarPostagemReversa):
+            raise WebserviceError(
+                'Request must be an instance of correios_lib' +
+                '.requests.RequestSolicitarPostagemReversa'
+            )
 
-    def test_insuccess_validating_entity(self):
-        entity = EntityBase(
-            wsdl=self.wsdl,
-            content={'test1': 123, 'test2': 'abc'},
-            schema=Schema({'test1': str, 'test2': str})
-        )
-
-        self.assertFalse(entity.validate())
-        self.assertEquals(
-            str(entity.error),
-            "expected str for dictionary value @ data['test1']"
-        )
+        return self.call('solicitarPostagemReversa', request)

@@ -27,6 +27,7 @@
 
 from zeep import Client
 from zeep.transports import Transport
+from voluptuous import Invalid, MultipleInvalid
 import certifi
 
 
@@ -93,3 +94,43 @@ class WebserviceBase():
         except ValueError:
             raise WebserviceError('The method you are trying to call does not '
                                   'exists.')
+
+
+class EntityBase(dict):
+
+    def __init__(self, **kargs):
+        super(EntityBase, self).__init__(kargs)
+        self.validate()
+
+        try:
+            raise getattr(self, 'error')
+        except AttributeError:
+            pass
+        except Invalid as e:
+            raise MultipleInvalid([e])
+
+    def get_schema(self):
+        """ Returns validation schema
+
+        Returns:
+            voluptous.Schema: Schema with validation rules
+        """
+        raise NotImplementedError("Every entitiy needs validation against a " +
+                                  "Schema.")
+
+    def validate(self):
+        """ Validates content against schema
+
+        In case of failure an error is kept inside the entity object,
+        to be displayed by the client user if needed.
+
+        Returns:
+            bool: Validation result
+        """
+        schema = self.get_schema()
+        try:
+            super(EntityBase, self).__init__(schema(self))
+            return True
+        except Exception as e:
+            self.error = e
+            return False

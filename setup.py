@@ -66,7 +66,8 @@ setup(
     install_requires=[
         'zeep==0.11.0',
         'certifi==2016.2.28',
-        'voluptuous==0.8.11'
+        'voluptuous==0.8.11',
+        'brazilnum==0.8.7'
     ],
     platforms=['any'],
     classifiers=CLASSIFIERS,

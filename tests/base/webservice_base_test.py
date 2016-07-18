@@ -25,33 +25,33 @@
 #
 ###############################################################################
 
+from correios_lib.base import WebserviceBase, WebserviceError
+from unittest import TestCase
+from tests.helper import StubWebserviceBase
 
-class EntityBase():
 
-    def __init__(self, wsdl, content=None, schema=None):
-        """ Base entity used to all responses and requests.
+class TestWebserviceBase(TestCase):
 
-        Args:
-            content (dict): Keeps content to further validation
-            wsdl (WebserviceBase): Used to get types used
-            schema (voluptuous.Schema): Used to validate entity
-        """
-        self.wsdl = wsdl
-        self.content = content
-        self.schema = schema
+    def setUp(self):
+        self.webservice = StubWebserviceBase(
+            env='DEV',
+            id_correios='empresacws',
+            password='123456'
+        )
 
-    def validate(self):
-        """ Validates content against schema
+    def test_not_implemented_get_env(self):
+        self.assertRaises(
+            NotImplementedError,
+            WebserviceBase,
+            'DEV',
+            'empresacws',
+            '123456'
+        )
 
-        In case of failure an error is kept inside the entity object,
-        to be displayed by the client user if needed.
-
-        Returns:
-            bool: Validation result
-        """
-        try:
-            self.schema(self.content)
-            return True
-        except Exception as e:
-            self.error = e
-            return False
+    def test_nonexisting_method(self):
+        self.assertRaises(
+            WebserviceError,
+            self.webservice.call,
+            'test',
+            {'test'}
+        )
