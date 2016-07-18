@@ -61,7 +61,7 @@ class WebserviceBase():
         else:
             verify = certifi.where()
 
-        if log_config is not None and isinstance(dict):
+        if log_config is not None and isinstance(log_config, dict):
             """ Example config from zeep documentation:
 
             {
