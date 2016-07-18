@@ -1,0 +1,63 @@
+<?xml version=\'1.0\' encoding=\'utf-8\'?>
+<soap-env:Envelope xmlns:ns0="http://service.logisticareversa.correios.com.br/" xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap-env:Body>
+    <ns0:solicitarPostagemReversa>
+      <codAdministrativo>8082650</codAdministrativo>
+      <codigo_servico>41076</codigo_servico>
+      <cartao>57018901</cartao>
+      <destinatario>
+        <nome>Fulano</nome>
+        <logradouro>SBN</logradouro>
+        <numero>10</numero>
+        <complemento>Bloco A</complemento>
+        <bairro>Plano Piloto</bairro>
+        <cidade>Brasi\xcc\x81lia</cidade>
+        <uf>DF</uf>
+        <cep>70002900</cep>
+        <ddd>61</ddd>
+        <telefone>34261111</telefone>
+        <email>fulano@mail.com</email>
+      </destinatario>
+      <coletas_solicitadas>
+        <tipo>C</tipo>
+        <id_cliente>1133566</id_cliente>
+        <valor_declarado>1500.0</valor_declarado>
+        <descricao></descricao>
+        <cklist>2</cklist>
+        <remetente>
+          <nome>Ciclano</nome>
+          <logradouro>Rua 35</logradouro>
+          <numero>10</numero>
+          <bairro>A\xcc\x81guas Claras(Sul)</bairro>
+          <referencia></referencia>
+          <cidade>Brasi\xcc\x81lia</cidade>
+          <uf>DF</uf>
+          <cep>71931180</cep>
+          <ddd>61</ddd>
+          <telefone>34262222</telefone>
+          <email>ciclano@mail.com</email>
+          <identificacao></identificacao>
+          <ddd_celular>61</ddd_celular>
+          <celular>92236666</celular>
+          <sms>S</sms>
+        </remetente>
+        <produto>
+          <codigo>116600063</codigo>
+          <tipo>0</tipo>
+          <qtd>1</qtd>
+        </produto>
+        <ag>23/07/2016</ag>
+        <cartao></cartao>
+        <servico_adicional></servico_adicional>
+        <ar>False</ar>
+        <obj_col>
+          <item>1</item>
+          <desc></desc>
+          <entrega></entrega>
+          <num></num>
+          <id>553366</id>
+        </obj_col>
+      </coletas_solicitadas>
+    </ns0:solicitarPostagemReversa>
+  </soap-env:Body>
+</soap-env:Envelope>

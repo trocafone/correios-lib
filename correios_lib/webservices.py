@@ -26,8 +26,7 @@
 ###############################################################################
 
 
-from correios_lib.base import WebserviceBase, WebserviceError
-from correios_lib.requests import RequestSolicitarPostagemReversa
+from correios_lib.base import WebserviceBase
 
 
 class LogisticaReversa(WebserviceBase):
@@ -43,10 +42,19 @@ class LogisticaReversa(WebserviceBase):
         return envs[env]
 
     def SolicitarPostagemReversa(self, request):
-        if not isinstance(request, RequestSolicitarPostagemReversa):
-            raise WebserviceError(
-                'Request must be an instance of correios_lib' +
-                '.requests.RequestSolicitarPostagemReversa'
-            )
+        return self.call("solicitarPostagemReversa", request)
 
-        return self.call('solicitarPostagemReversa', request)
+    def AcompanharPedido(self, request):
+        return self.call('acompanharPedido', request)
+
+    def AcompanharPedidoPorData(self, request):
+        return self.call('acompanharPedidoPorData', request)
+
+    def CancelarPedido(self, request):
+        return self.call('cancelarPedido', request)
+
+    def SolicitarRange(self, request):
+        return self.call('solicitarRange', request)
+
+    def CalcularDigitoVerificador(self, request):
+        return self.call('calcularDigitoVerificador', request)

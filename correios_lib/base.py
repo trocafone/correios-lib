@@ -29,6 +29,7 @@ from zeep import Client
 from zeep.transports import Transport
 from voluptuous import Invalid, MultipleInvalid
 import certifi
+import logging.config
 
 
 class WebserviceError(Exception):
@@ -37,7 +38,8 @@ class WebserviceError(Exception):
 
 class WebserviceBase():
 
-    def __init__(self, env, id_correios, password, cert=False):
+    def __init__(self, env, id_correios, password,
+                 cert=False, log_config=None):
         ''' Webservice initialization.
 
         Depending on the env get a different wsdl definition.
@@ -47,6 +49,7 @@ class WebserviceBase():
             env (str): Environment used to get the wsdl
             id_correios (str): IdCorreios given by correios website
             password (str): password vinculated to the IdCorreios
+            log_config (dict): Dictionary configurations of logging
         '''
 
         ''' Untrusted ssl certificate for homolog envs see more at:
@@ -57,6 +60,34 @@ class WebserviceBase():
             verify = False
         else:
             verify = certifi.where()
+
+        if log_config is not None and isinstance(dict):
+            """ Example config from zeep documentation:
+
+            {
+                'version': 1,
+                'formatters': {
+                    'verbose': {
+                        'format': '%(name)s: %(message)s'
+                    }
+                },
+                'handlers': {
+                    'console': {
+                        'level': 'DEBUG',
+                        'class': 'logging.StreamHandler',
+                        'formatter': 'verbose',
+                    },
+                },
+                'loggers': {
+                    'zeep.transports': {
+                        'level': 'DEBUG',
+                        'propagate': True,
+                        'handlers': ['console'],
+                    },
+                }
+            }
+            """
+            logging.config.dictConfig(log_config)
 
         t = Transport(
             verify=verify,
@@ -89,8 +120,19 @@ class WebserviceBase():
         '''
         service_method = getattr(self.client.service, method, None)
 
+        req_type = 'Request' + method[0].upper() + method[1:]
+        req_instance = request.__class__.__name__
+
+        if req_type != req_instance:
+            raise WebserviceError(
+                'Request must be an instance of {0}, given {1}'.format(
+                    req_type,
+                    req_instance
+                 )
+            )
+
         try:
-            return service_method(request)
+            return service_method(**request)
         except ValueError:
             raise WebserviceError('The method you are trying to call does not '
                                   'exists.')
