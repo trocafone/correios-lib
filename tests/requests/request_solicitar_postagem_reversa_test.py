@@ -57,15 +57,9 @@ class RequestSolicitarPostagemReversaTest(TestCase):
                             qtd='1'
                         ),
                         ag=5,
-                        cartao='',
-                        servico_adicional='',
-                        ar='',
                         obj_col=[
                             Objeto(
                                 item=1,
-                                desc='',
-                                entrega='',
-                                num='',
                                 id='553366'
                             )
                         ]

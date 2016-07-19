@@ -62,7 +62,7 @@ class Coleta(EntityBase):
             Optional('valor_declarado'): float,
             Optional('servico_adicional'): All(Coerce(str), Length(max=20)),
             Optional('descricao'): All(Coerce(str), Length(max=255)),
-            Optional('ar'): Coerce(bool),
+            Optional('ar'): Any(1, 0),
             Optional('cklist'): Any(2, 4, 5, 7),
             Optional('documento'): [str],
             Required('remetente'): Remetente,
