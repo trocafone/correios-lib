@@ -42,6 +42,18 @@ class RequestSolicitarPostagemReversa(EntityBase):
         }, extra=REMOVE_EXTRA)
 
 
+class RequestSolicitarPostagemSimultanea(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('codAdministrativo'): Coerce(int),
+            Required('codigo_servico'): Coerce(int),
+            Required('cartao'): Coerce(int),
+            Required('destinatario'): Destinatario,
+            Required('coletas_solicitadas'): [ColetaSimultanea]
+        }, extra=REMOVE_EXTRA)
+
+
 class RequestCancelarPedido(EntityBase):
 
     def get_schema(self):

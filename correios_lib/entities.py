@@ -71,6 +71,22 @@ class Coleta(EntityBase):
         }, extra=REMOVE_EXTRA)
 
 
+class ColetaSimultanea(EntityBase):
+
+    def get_schema(self):
+        return Schema({
+            Required('tipo'): Any('C', 'A'),
+            Optional('id_cliente'): All(Length(max=30)),
+            Optional('valor_declarado'): float,
+            Optional('descricao'): All(Coerce(str), Length(max=255)),
+            Optional('cklist'): Any(2, 4, 5, 7),
+            Optional('documento'): [str],
+            Required('remetente'): Remetente,
+            Optional('produto'): Produto,
+            Optional('obs'): All(Coerce(str))
+        }, extra=REMOVE_EXTRA)
+
+
 class Objeto(EntityBase):
 
     def get_schema(self):

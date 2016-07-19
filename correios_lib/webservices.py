@@ -44,6 +44,9 @@ class LogisticaReversa(WebserviceBase):
     def SolicitarPostagemReversa(self, request):
         return self.call("solicitarPostagemReversa", request)
 
+    def SolicitarPostagemSimultanea(self, request):
+        return self.call("solicitarPostagemSimultanea", request)
+
     def AcompanharPedido(self, request):
         return self.call('acompanharPedido', request)
 
