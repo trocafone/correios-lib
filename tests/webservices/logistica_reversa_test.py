@@ -5,7 +5,8 @@ from correios_lib.webservices import LogisticaReversa
 from correios_lib.entities import Remetente, Destinatario, Coleta, \
      Objeto, Produto
 from correios_lib.requests import RequestSolicitarPostagemReversa, \
-     RequestAcompanharPedido
+     RequestAcompanharPedido, RequestAcompanharPedidoPorData
+import datetime
 
 
 class LogisticaReversaTest(TestCase):
@@ -97,4 +98,13 @@ class LogisticaReversaTest(TestCase):
             numeroPedido=194848820
         )
         response = self.client.AcompanharPedido(request)
+        self.assertEquals(response['cod_erro'], None)
+
+    def test_acompanhar_pedido_por_data(self):
+        request = RequestAcompanharPedidoPorData(
+            codAdministrativo='08082650',
+            tipoSolicitacao='A',
+            data=datetime.date(2016, 1, 1)
+        )
+        response = self.client.AcompanharPedidoPorData(request)
         self.assertEquals(response['cod_erro'], None)
