@@ -12,14 +12,13 @@ This project was developed mainly to for reversal logistics, but feel free to co
 
 #### Logística Reversa ([DOCS](https://github.com/trocafone/correios-lib/blob/master/manuals/Manual de Implementacao do Web Service Logistica Reversa _12_05_2016_Final.pdf)):
 
-
-[x] solicitarPostagemReversa
-[x] acompanharPedido
-[x] acompanharPedidoPorData
-[x] cancelarPedido
-[x] calcularDigitoVerificador
-[x] solicitarPostagemSimultanea
-[x] solicitarRange
+- [x] solicitarPostagemReversa
+- [x] acompanharPedido
+- [x] acompanharPedidoPorData
+- [x] cancelarPedido
+- [x] calcularDigitoVerificador
+- [x] solicitarPostagemSimultanea
+- [x] solicitarRange
 
 ## Roadmap
 
