@@ -19,6 +19,7 @@ tests/helper.py
 tests/base/__init__.py
 tests/base/webservice_base_test.py
 tests/entities/__init__.py
+tests/entities/coleta_simultanea_test.py
 tests/entities/coleta_test.py
 tests/entities/destinatario_test.py
 tests/entities/objeto_test.py

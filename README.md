@@ -10,8 +10,30 @@ An easy to use and well tested library to use correios webservices.
 
 This project was developed mainly to for reversal logistics, but feel free to colaborate with any improvement you need, the implemented methods are:
 
-Logística Reversa ([DOCS]):
+#### Logística Reversa ([DOCS](https://github.com/trocafone/correios-lib/blob/master/manuals/Manual de Implementacao do Web Service Logistica Reversa _12_05_2016_Final.pdf)):
 
-- SolicitarPostagemReversa
-- AcompanharPedido
-- Cancelar Pedido
+
+[x] solicitarPostagemReversa
+[x] acompanharPedido
+[x] acompanharPedidoPorData
+[x] cancelarPedido
+[x] calcularDigitoVerificador
+[x] solicitarPostagemSimultanea
+[x] solicitarRange
+
+## Roadmap
+
+Check out the next webservices to be implemented at our [wiki page]()
+
+## Contributing
+
+You can find more about it at the [wiki]()
+
+## Thanks to ...
+
+This project was possible thanks to  these really helpfull projects:
+
+- [Python Zeep](http://docs.python-zeep.org/en/latest/)
+- [Certifi](https://certifi.io/en/latest/)
+- [voluptuous](https://github.com/alecthomas/voluptuous)
+- [Brazilnum](https://github.com/poliquin/brazilnum)
