@@ -26,7 +26,7 @@
 ###############################################################################
 
 from correios_lib.base import EntityBase
-from correios_lib.validators import CEP, Email, Date
+from correios_lib.validators import CEP, Email, Date, Price
 from voluptuous import *
 
 
@@ -59,7 +59,7 @@ class Coleta(EntityBase):
             Optional('id_cliente'): All(Length(max=30)),
             Optional('ag'): Date,
             Optional('cartao'): Coerce(str),
-            Optional('valor_declarado'): float,
+            Optional('valor_declarado'): Price,
             Optional('servico_adicional'): All(Coerce(str), Length(max=20)),
             Optional('descricao'): All(Coerce(str), Length(max=255)),
             Optional('ar'): Any(1, 0),
@@ -77,7 +77,7 @@ class ColetaSimultanea(EntityBase):
         return Schema({
             Required('tipo'): Any('C', 'A'),
             Optional('id_cliente'): All(Length(max=30)),
-            Optional('valor_declarado'): float,
+            Optional('valor_declarado'): Price,
             Optional('descricao'): All(Coerce(str), Length(max=255)),
             Optional('cklist'): Any(2, 4, 5, 7),
             Optional('documento'): [str],

@@ -70,3 +70,10 @@ def Date(value):
         return value.strftime(fmt)
     except Exception:
         raise Invalid("Should be an instance of datetime.datetime")
+
+
+def Price(value):
+    if not (type(value) == int or type(value) == float):
+        raise Invalid("This price is not and integer or a float.")
+    value = float(value)
+    return "%.2f" % value
