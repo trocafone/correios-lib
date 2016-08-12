@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: correios-lib
-Version: 0.0.1
+Version: 0.1.0
 Summary: Interface python com logs para uso dos serviços fornecidos pelo SIGEPWeb dos Correios.
 Home-page: https://github.com/trocafone/correios-lib
 Author: Flávio Briz
