@@ -31,6 +31,7 @@ tests/validators/CNPJ_test.py
 tests/validators/CPF_test.py
 tests/validators/Date_test.py
 tests/validators/Email_test.py
+tests/validators/Price_test.py
 tests/validators/__init__.py
 tests/webservices/__init__.py
 tests/webservices/logistica_reversa_test.py
