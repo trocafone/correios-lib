@@ -25,6 +25,7 @@
 #
 ###############################################################################
 
+from requests import Session
 from zeep import Client
 from zeep.transports import Transport
 from voluptuous import Invalid, MultipleInvalid
@@ -61,6 +62,8 @@ class WebserviceBase():
         else:
             verify = certifi.where()
 
+        self.timeout = timeout or 300
+
         if log_config is not None and isinstance(log_config, dict):
             """ Example config from zeep documentation:
 
@@ -89,11 +92,12 @@ class WebserviceBase():
             """
             logging.config.dictConfig(log_config)
 
-        t = Transport(
-            verify=verify,
-            timeout=timeout or 300,
-            http_auth=(id_correios, password)
-        )
+        session = Session()
+        session.timeout = self.timeout
+        session.verify = verify
+        session.auth=(id_correios, password)
+
+        t = Transport(session=session);
         self.client = Client(wsdl=self.get_env(env), transport=t)
 
     def get_env(self, env):
