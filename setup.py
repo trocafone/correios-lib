@@ -71,5 +71,5 @@ setup(
     ],
     platforms=['any'],
     classifiers=CLASSIFIERS,
-    test_suite='tests',
+    test_suite='tests.unit',
 )
