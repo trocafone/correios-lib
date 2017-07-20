@@ -39,7 +39,7 @@ class WebserviceError(Exception):
 class WebserviceBase():
 
     def __init__(self, env, id_correios, password,
-                 cert=False, log_config=None):
+                 cert=False, log_config=None, timeout=None):
         ''' Webservice initialization.
 
         Depending on the env get a different wsdl definition.
@@ -91,6 +91,7 @@ class WebserviceBase():
 
         t = Transport(
             verify=verify,
+            timeout=timeout or 300,
             http_auth=(id_correios, password)
         )
         self.client = Client(wsdl=self.get_env(env), transport=t)

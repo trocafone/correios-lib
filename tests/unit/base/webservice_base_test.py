@@ -27,7 +27,7 @@
 
 from correios_lib.base import WebserviceBase, WebserviceError
 from unittest import TestCase
-from tests.helper import StubWebserviceBase
+from tests.unit.helper import StubWebserviceBase
 
 
 class TestWebserviceBase(TestCase):

@@ -56,8 +56,8 @@ setup(
     version=get_version('correios_lib'),
     url='https://github.com/trocafone/correios-lib',
     license='MIT License',
-    author='Flávio Briz',
-    author_email='flavio.briz@gmail.com',
+    author='Trocafone Tech Team',
+    author_email='tech@trocafone.com',
     keywords='correios sigep sigepweb reversa',
     description='Interface python com logs para uso dos serviços'
                 ' fornecidos pelo SIGEPWeb dos Correios.',
@@ -65,11 +65,11 @@ setup(
     include_package_data=True,
     install_requires=[
         'zeep==0.11.0',
-        'certifi==2016.2.28',
+        'certifi==2017.4.17',
         'voluptuous==0.8.11',
         'brazilnum==0.8.7'
     ],
     platforms=['any'],
     classifiers=CLASSIFIERS,
-    test_suite='tests',
+    test_suite='tests.unit',
 )
