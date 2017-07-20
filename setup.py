@@ -65,7 +65,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'zeep==0.11.0',
-        'certifi==2016.2.28',
+        'certifi==2017.4.17',
         'voluptuous==0.8.11',
         'brazilnum==0.8.7'
     ],
