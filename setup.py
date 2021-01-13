@@ -64,10 +64,10 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'zeep==2.2.0',
-        'certifi==2017.4.17',
-        'voluptuous==0.8.11',
-        'brazilnum==0.8.7'
+        'certifi',
+        'zeep~=4.0',
+        'voluptuous~=0.12.1',
+        'brazilnum~=0.8.8'
     ],
     platforms=['any'],
     classifiers=CLASSIFIERS,
