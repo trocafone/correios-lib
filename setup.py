@@ -66,7 +66,7 @@ setup(
     install_requires=[
         'certifi',
         'zeep~=4.0',
-        'voluptuous~=0.12.1',
+        'voluptuous~=0.8.1',
         'brazilnum~=0.8.8'
     ],
     platforms=['any'],
